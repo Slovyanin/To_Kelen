@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>TODO</title>
+    <meta charset="utf-8">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- project staticfiles -->
+    {% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <script src="{% static 'js/todo.js' %}"></script>
+
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<div class="line">
+		</div>
+		<div class="std">
+			<div class="std_1">
+				<h1>SIMPLE TODO LIST</h1>
+			</div>
+			<div class="std_2">
+				<h3>FROM RUBY GARAGE</h3>
+			</div>
+		</div>
+	</div>
+    <div id="content">
+        <section id="1234567890" class="main">
+            <div class="first">
+                <div>
+                    <img src="{% static 'images/menut.png' %}">
+                </div>
+                <div>
+                    <span class="m-words project-title">Complete the test task for Ruby Garage</span>
+                </div>
+                <div>
+                    <a class="a-proj-name-change" href="javascript:project_init_change_name(1234567890);">
+                        <img src="{% static 'images/notet.png' %}">
+                    </a>
+                </div>
+                <div>
+                    <a href="javascript:project_delete(1234567890)">
+                        <img src="{% static 'images/backett.png' %}">
+                    </a>
+                </div>
+            </div>
+            <div class="second">
+                <div>
+                    <img src="{% static 'images/plust.png' %}">
+                </div>
+                <div>
+                    <input type="text" name="name" placeholder="Start typing here to create a task">
+                </div>
+                <button onclick="add_task(1234567890)">
+                    <span class="add-words valign-middle">Add Task</span>
+                </button>
+                <div>
+                </div>
+            </div>
+            <div class="tasks_list">
+                <div class="third" id="123">
+                    <div>
+                        <input type="checkbox" class="checkbox">
+                    </div>
+                    <div>
+                        <span class="t-words">Open thid mock-up in Adobe Fireworks</span>
+                    </div>
+                    <div>
+                        <img src="{% static 'images/arrowt.png' %}">
+                    </div>
+                    <div>
+                        <a href="javascript:init_task_change(123)"><img src="{% static 'images/notemt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="javascript:task_delete(123)"><img src="{% static 'images/backetmt.png' %}"></a>
+                    </div>
+                </div>
+                <div class="third">
+                    <div>
+                        <input type="checkbox" id="qwe"/>
+                    </div>
+                    <div>
+                        <span class="t-words">Attentively check the file</span>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/arrowt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/notemt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/backetmt.png' %}"></a>
+                    </div>
+                </div>
+                <div class="third">
+                    <div>
+                        <input type="checkbox" id="qwe"/>
+                    </div>
+                    <div>
+                        <span class="t-words">Write HTML & CSS</span>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/arrowt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/notemt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/backetmt.png' %}"></a>
+                    </div>
+                </div>
+                <div class="third">
+                    <div>
+                        <input type="checkbox" id="qwe"/>
+                    </div>
+                    <div>
+                        <span class="t-words">Add Javascript to implement adding / editing / removing for todo items and lists taking into account as more use cases as possible</span>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/arrowt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/notemt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/backetmt.png' %}"></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="main">
+            <div class="first">
+                <div>
+                    <a href="#"><img src="{% static 'images/menut.png' %}"></a>
+                </div>
+                <div>
+                    <span class="m-words">For Home</span>
+                </div>
+                <div>
+                    <a href="#"><img src="{% static 'images/notet.png' %}"></a>
+                </div>
+                <div>
+                    <a href="#"><img src="{% static 'images/backett.png' %}"></a>
+                </div>
+            </div>
+            <div class="second">
+                <div>
+                    <a href="#"><img src="{% static 'images/plust.png' %}"></a>
+                </div>
+                <div>
+                    <form action="" method="post">
+                        <input type="text" name="name" placeholder="Start typing here to create a task">
+                    </form>
+                </div>
+                <div>
+                    <a class="addt" href="#"><span class="add-words">Add Task</span></a>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div id="tasks_list">
+                <div class="third">
+                    <div>
+                        <input type="checkbox" id="qwe"/>
+                    </div>
+                    <div>
+                        <span class="t-words">Buy a milk</span>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/arrowt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/notemt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/backetmt.png' %}"></a>
+                    </div>
+                </div>
+                <div class="third">
+                    <div>
+                        <input type="checkbox" id="qwe"/>
+                    </div>
+                    <div>
+                        <span class="t-words">Call Mam</span>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/arrowt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/notemt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/backetmt.png' %}"></a>
+                    </div>
+                </div>
+                <div class="third">
+                    <div>
+                        <input type="checkbox" id="qwe"/>
+                    </div>
+                    <div>
+                        <span class="t-words">Clean the room</span>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/arrowt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/notemt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/backetmt.png' %}"></a>
+                    </div>
+                </div>
+                <div class="third">
+                    <div>
+                        <input type="checkbox" id="qwe"/>
+                    </div>
+                    <div>
+                        <span class="t-words">Repair the DVD Player</span>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/arrowt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/notemt.png' %}"></a>
+                    </div>
+                    <div>
+                        <a href="#"><img src="{% static 'images/backetmt.png' %}"></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="addlist-div">
+            <button class="addlist">
+                <div class="addb">
+                    <img class="valign-middle" src="{% static 'images/plusmt.png' %}">
+                    <span class="a-words valign-middle">Add TODO List</span>
+                </div>
+            </button>
+        </div>
+    </div>
+	<div id="footer" class="line_b"></div>
+</div>
+</body>
+</html>
