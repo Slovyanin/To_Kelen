@@ -1,13 +1,18 @@
-
-// sortable list of tasks
-$(function () {
+// bind events
+function bind_events() {
     $(".tasks_list").sortable({
       stop: function(event, ui){}
     });
-});
-$(".tasks_list").on("sortstop", function(event, ui){
-    // change order in DB
-});
+    $(".tasks_list").on("sortstop", function(event, ui){
+        console.log($(this).parent('section').attr('id'));
+        // change order in DB
+    });
+}
+
+function resize_body() {
+    var contents_height = $("#header").outerHeight() + $("#content").outerHeight() + $("#footer").outerHeight() + 40;
+    $("body").height(Math.max(contents_height, $(window).height()));
+}
 
 // change project name
 function project_init_change_name(id) {
@@ -27,11 +32,11 @@ function project_change_name(id) {
     section.find('.project-name-change').replaceWith('<span class="m-words project-title">' + name + '</span>');
 }
 
-
 // delete project
 function project_delete(id) {
     var section = $('#'+id);
     section.remove();
+    resize_body();
     // delete project in DB
 }
 
@@ -46,9 +51,10 @@ function add_task(id) {
         '<div><a href="javascript:init_task_change(123)"><img src="/static/images/notemt.png"></a></div>' +
         '<div><a href="#"><img src="/static/images/backetmt.png"></a></div>' +
         '</div>');
+    resize_body();
 }
 
-//change task
+// change task
 function init_task_change(id) {
     var task_div = $('#'+id);
     var oldname = task_div.find('.t-words').text()
@@ -66,9 +72,20 @@ function task_change(id) {
     task_div.find('.task-change').replaceWith('<span class="t-words">' + name + '</span>');
 }
 
-//delete task
+// delete task
 function task_delete(id) {
     var task_div = $('#'+id);
     task_div.remove();
+    resize_body();
     //remove task from DB
+}
+
+// new project
+function render_project(id) {
+    var projects = $('#projects');
+    $.get( "/render_project", function( data ) {
+        projects.append( data );
+        bind_events();
+        resize_body();
+    });
 }
