@@ -13,12 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.views.generic import TemplateView
+from rest_framework import routers
 
-from .views import IndexView
+from .views import IndexView, ProjectViewSet, TaskViewSet
+
+router = routers.DefaultRouter()
+router.register(r'projects', ProjectViewSet)
+router.register(r'tasks', TaskViewSet)
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^render_project/$', TemplateView.as_view(template_name='project.html'), name='project'),
+    url(r'^project/(?P<proj_id>[^/.]+)/tasks/$', TaskViewSet.as_view({'get': 'list'})),
 ]
+
+urlpatterns += router.urls
