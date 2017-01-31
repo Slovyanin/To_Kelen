@@ -1,0 +1,18 @@
+{% load static %}
+<div class="third" id="task_{{ task.id }}">
+    <div>
+        <input type="checkbox" class="checkbox" onclick="task_status({{ task.id }})" {% if task.status %} checked {% endif %}>
+    </div>
+    <div>
+        <span class="t-words">{{ task.name }}</span>
+    </div>
+    <div>
+        <img src="{% static 'images/arrowt.png' %}">
+    </div>
+    <div>
+        <a href="javascript:init_task_change({{ task.id }})"><img src="{% static 'images/notemt.png' %}"></a>
+    </div>
+    <div>
+        <a href="javascript:task_delete({{ task.id }})"><img src="{% static 'images/backetmt.png' %}"></a>
+    </div>
+</div>

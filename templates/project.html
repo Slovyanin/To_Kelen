@@ -1,19 +1,19 @@
 {% load static %}
-<section id="1234567890" class="main">
+<section id="project_{{ project.id }}" class="main">
     <div class="first">
         <div>
             <img src="{% static 'images/menut.png' %}">
         </div>
         <div>
-            <span class="m-words project-title">Complete the test task for Ruby Garage</span>
+            <span class="m-words project-title">{{ project.name }}</span>
         </div>
         <div>
-            <a class="a-proj-name-change" href="javascript:project_init_change_name(1234567890);">
+            <a class="a-proj-name-change" href="javascript:project_init_change_name({{ project.id }});">
                 <img src="{% static 'images/notet.png' %}">
             </a>
         </div>
         <div>
-            <a href="javascript:project_delete(1234567890)">
+            <a href="javascript:project_delete({{ project.id }})">
                 <img src="{% static 'images/backett.png' %}">
             </a>
         </div>
@@ -25,80 +25,12 @@
         <div>
             <input type="text" name="name" placeholder="Start typing here to create a task">
         </div>
-        <button onclick="add_task(1234567890)">
+        <button onclick="add_task({{ project.id }})">
             <span class="add-words valign-middle">Add Task</span>
         </button>
         <div>
         </div>
     </div>
     <div class="tasks_list">
-        <div class="third" id="123">
-            <div>
-                <input type="checkbox" class="checkbox">
-            </div>
-            <div>
-                <span class="t-words">Open thid mock-up in Adobe Fireworks</span>
-            </div>
-            <div>
-                <img src="{% static 'images/arrowt.png' %}">
-            </div>
-            <div>
-                <a href="javascript:init_task_change(123)"><img src="{% static 'images/notemt.png' %}"></a>
-            </div>
-            <div>
-                <a href="javascript:task_delete(123)"><img src="{% static 'images/backetmt.png' %}"></a>
-            </div>
-        </div>
-        <div class="third">
-            <div>
-                <input type="checkbox" id="qwe"/>
-            </div>
-            <div>
-                <span class="t-words">Attentively check the file</span>
-            </div>
-            <div>
-                <a href="#"><img src="{% static 'images/arrowt.png' %}"></a>
-            </div>
-            <div>
-                <a href="#"><img src="{% static 'images/notemt.png' %}"></a>
-            </div>
-            <div>
-                <a href="#"><img src="{% static 'images/backetmt.png' %}"></a>
-            </div>
-        </div>
-        <div class="third">
-            <div>
-                <input type="checkbox" id="qwe"/>
-            </div>
-            <div>
-                <span class="t-words">Write HTML & CSS</span>
-            </div>
-            <div>
-                <a href="#"><img src="{% static 'images/arrowt.png' %}"></a>
-            </div>
-            <div>
-                <a href="#"><img src="{% static 'images/notemt.png' %}"></a>
-            </div>
-            <div>
-                <a href="#"><img src="{% static 'images/backetmt.png' %}"></a>
-            </div>
-        </div>
-        <div class="third">
-            <div>
-                <input type="checkbox" id="qwe"/>
-            </div>
-            <div>
-                <span class="t-words">Add Javascript to implement adding / editing / removing for todo items and lists taking into account as more use cases as possible</span>
-            </div>
-            <div>
-                <a href="#"><img src="{% static 'images/arrowt.png' %}"></a>
-            </div>
-            <div>
-                <a href="#"><img src="{% static 'images/notemt.png' %}"></a>
-            </div>
-            <div>
-                <a href="#"><img src="{% static 'images/backetmt.png' %}"></a>
-            </div>
-        </div>
     </div>
 </section>

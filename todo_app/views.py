@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from django.views.generic import TemplateView
 
@@ -8,6 +8,26 @@ from .serializers import ProjectSerializer, TaskSerializer
 
 class IndexView(TemplateView):
     template_name = 'index.html'
+
+
+class RenderTask(TemplateView):
+    template_name = 'task.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RenderTask, self).get_context_data(**kwargs)
+        context['task'] = get_object_or_404(Task, pk=self.kwargs.get('pk'))
+
+        return context
+
+
+class RenderProject(TemplateView):
+    template_name = 'project.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RenderProject, self).get_context_data(**kwargs)
+        context['project'] = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+
+        return context
 
 
 class ProjectViewSet(viewsets.ModelViewSet):

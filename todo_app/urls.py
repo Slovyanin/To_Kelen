@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.views.generic import TemplateView
 from rest_framework import routers
 
-from .views import IndexView, ProjectViewSet, TaskViewSet
+from .views import IndexView, ProjectViewSet, TaskViewSet, RenderProject, RenderTask
 
 router = routers.DefaultRouter()
 router.register(r'projects', ProjectViewSet)
@@ -25,7 +25,8 @@ router.register(r'tasks', TaskViewSet)
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^render_project/$', TemplateView.as_view(template_name='project.html'), name='project'),
+    url(r'^render_project/(?P<pk>\d+)', RenderProject.as_view(), name='render_project'),
+    url(r'^render_task/(?P<pk>\d+)', RenderTask.as_view(), name='render_task'),
     url(r'^project/(?P<proj_id>[^/.]+)/tasks/$', TaskViewSet.as_view({'get': 'list'})),
 ]
 

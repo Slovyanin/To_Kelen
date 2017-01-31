@@ -16,6 +16,10 @@
 
 </head>
 <body>
+<script>
+    resize_body();
+    render_all();
+</script>
 <div id="wrapper">
 	<div id="header">
 		<div class="line">
@@ -136,7 +140,7 @@
             </section>
         </div>
         <div class="addlist-div">
-            <button class="addlist" onclick="render_project(1234567890)">
+            <button class="addlist" onclick="add_project()">
                 <div class="addb">
                     <img class="valign-middle" src="{% static 'images/plusmt.png' %}">
                     <span class="a-words valign-middle">Add TODO List</span>
