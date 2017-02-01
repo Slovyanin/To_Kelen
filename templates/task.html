@@ -7,12 +7,14 @@
         <span class="t-words">{{ task.name }}</span>
     </div>
     <div>
-        <img src="{% static 'images/arrowt.png' %}">
+        <a href="javascript:show_datepicker({{ task.id }})">
+            <img class="ico" src="{% static 'images/clock.png' %}"></a>
+        <input class="dp" type="text" style="height: 0px; width:0px; border: 0px;">
     </div>
     <div>
-        <a href="javascript:init_task_change({{ task.id }})"><img src="{% static 'images/notemt.png' %}"></a>
+        <a href="javascript:init_task_change({{ task.id }})"><img class="ico" src="{% static 'images/pencil.png' %}"></a>
     </div>
     <div>
-        <a href="javascript:task_delete({{ task.id }})"><img src="{% static 'images/backetmt.png' %}"></a>
+        <a href="javascript:task_delete({{ task.id }})"><img class="ico" src="{% static 'images/skullnbones.png' %}"></a>
     </div>
 </div>

@@ -318,3 +318,8 @@ body {
 		.task-change button:active {
 			background-image:linear-gradient(rgb(77,132,100) 0%,rgb(150,205,176) 97%);
 		}
+
+.ico {
+	width: 14px;
+	height: 14px;
+}

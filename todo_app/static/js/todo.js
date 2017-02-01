@@ -1,6 +1,6 @@
 // bind events
 function bind_events(id) {
-    var proj = $('#project_' + id)
+    var proj = $('#project_' + id);
     proj.find(".tasks_list").sortable({
       stop: function(event, ui){}
     });
@@ -143,6 +143,7 @@ function render_task(id, proj_id) {
     var section = $('#project_'+proj_id);
     $.get( "/render_task/" + id, function( data ) {
         section.find('.tasks_list').append( data );
+        $("#task_" + id).find(".dp").datepicker();
         resize_body();
     });
 }
@@ -159,4 +160,8 @@ function render_all() {
             });
         });
     });
+}
+
+function show_datepicker(id) {
+    $("#task_" + id).find(".dp").datepicker('show');
 }
