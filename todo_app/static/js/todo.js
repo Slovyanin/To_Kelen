@@ -43,7 +43,7 @@ function project_change_name(id) {
     var section = $('#project_'+id);
     var name = section.find(".project-name-change input").val();
     $.ajax({
-        type: "PUT",
+        type: "PATCH",
         url: "/projects/" + id + "/",
         data: {name: name},
     });
@@ -94,7 +94,7 @@ function task_change(id) {
     var task_div = $('#task_'+id);
     var name = task_div.find(".task-change input").val();
     $.ajax({
-        type: "PUT",
+        type: "PATCH",
         url: "/tasks/" + id + "/",
         data: {
             name: name,
@@ -109,7 +109,7 @@ function task_status(id) {
     var status = task_div.find('.checkbox').prop('checked');
     console.log(status)
     $.ajax({
-        type: "PUT",
+        type: "PATCH",
         url: "/tasks/" + id + "/",
         data: {
             status: status,
@@ -142,8 +142,23 @@ function render_project(id) {
 function render_task(id, proj_id) {
     var section = $('#project_'+proj_id);
     $.get( "/render_task/" + id, function( data ) {
-        section.find('.tasks_list').append( data );
-        $("#task_" + id).find(".dp").datepicker();
+        section.find('.tasks_list').append(data);
+        var task_div = $("#task_" + id)
+        task_div.find(".dp").datepicker({dateFormat: "yy-mm-dd"});
+        task_div.find(".dp").change(function () {
+            var date = $(this).val();
+            $.when($.ajax({
+                type: "PATCH",
+                url: "/tasks/" + id + "/",
+                data: {
+                    deadline: date,
+                },
+            })).then(function () {
+                $.get( "/render_task/" + id, function( againdata ) {
+                task_div.find(".t-words").text($(againdata).find(".t-words").text())
+                });
+            });
+        });
         resize_body();
     });
 }

@@ -4,7 +4,11 @@
         <input type="checkbox" class="checkbox" onclick="task_status({{ task.id }})" {% if task.status %} checked {% endif %}>
     </div>
     <div>
-        <span class="t-words">{{ task.name }}</span>
+        {% if task.deadline %}
+            <span class="t-words">{{ task.name }} (Deadline: {{ task.deadline }})</span>
+        {% else %}
+            <span class="t-words">{{ task.name }}</span>
+        {% endif %}
     </div>
     <div>
         <a href="javascript:show_datepicker({{ task.id }})">

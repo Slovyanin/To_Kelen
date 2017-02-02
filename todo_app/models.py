@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 
@@ -23,10 +25,14 @@ class Task(models.Model):
     name = models.CharField(max_length=1024, null=True)
     status = models.BooleanField(default=False)
     priority = models.IntegerField(default=0)
-    deadline = models.DateTimeField(blank=True, null=True)
+    deadline = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.name} ({self.project.name})"
+
+    @property
+    def is_past_deadline(self):
+        return self.deadline < date.today()
 
 
 def get_statuses():
