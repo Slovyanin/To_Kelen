@@ -5,11 +5,9 @@ function bind_events(id) {
         stop: function(event, ui){}
     });
     proj.find(".tasks_list").on("sortstop", function(event, ui){
-        console.log($(this).parent('section').attr('id'));
         // change order in DB
         var ul = $(this).parent('section').find('.tasks_list');
         ul.children('li').each(function( index ){
-            console.log( index + ": " + $( this ).attr('id') );
             $.ajax({
                 type: "PATCH",
                 url: "/tasks/" + $( this ).attr('id').split('_')[1] + "/",
