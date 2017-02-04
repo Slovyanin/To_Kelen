@@ -2,11 +2,20 @@
 function bind_events(id) {
     var proj = $('#project_' + id);
     proj.find(".tasks_list").sortable({
-      stop: function(event, ui){}
+        stop: function(event, ui){}
     });
     proj.find(".tasks_list").on("sortstop", function(event, ui){
         console.log($(this).parent('section').attr('id'));
         // change order in DB
+        var ul = $(this).parent('section').find('.tasks_list');
+        ul.children('li').each(function( index ){
+            console.log( index + ": " + $( this ).attr('id') );
+            $.ajax({
+                type: "PATCH",
+                url: "/tasks/" + $( this ).attr('id').split('_')[1] + "/",
+                data: {priority: ul.children('li').size() - index},
+            });
+        });
     });
 }
 
@@ -141,9 +150,21 @@ function render_project(id) {
 // render task
 function render_task(id, proj_id) {
     var section = $('#project_'+proj_id);
+
     $.get( "/render_task/" + id, function( data ) {
         section.find('.tasks_list').append(data);
-        var task_div = $("#task_" + id)
+        var task_div = $("#task_" + id);
+
+        var ul = section.find('.tasks_list'),
+        li = ul.children('li');
+
+        li.detach().sort(function(a,b) {
+            return $(b).data('sortby') - $(a).data('sortby');
+        });
+
+        ul.append(li);
+
+        // deadline
         task_div.find(".dp").datepicker({dateFormat: "yy-mm-dd"});
         task_div.find(".dp").change(function () {
             var date = $(this).val();

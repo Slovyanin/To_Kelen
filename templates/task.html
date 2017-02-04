@@ -1,5 +1,5 @@
 {% load static %}
-<div class="third" id="task_{{ task.id }}">
+<li data-sortby="{{ task.priority }}" class="third" id="task_{{ task.id }}">
     <div>
         <input type="checkbox" class="checkbox" onclick="task_status({{ task.id }})" {% if task.status %} checked {% endif %}>
     </div>
@@ -21,4 +21,4 @@
     <div>
         <a href="javascript:task_delete({{ task.id }})"><img class="ico" src="{% static 'images/skullnbones.png' %}"></a>
     </div>
-</div>
+</li>
