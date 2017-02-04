@@ -1,3 +1,7 @@
+$(document).ready(function () {
+    csrf = $('input[name=csrfmiddlewaretoken]').val()
+})
+
 // bind events
 function bind_events(id) {
     var proj = $('#project_' + id);
@@ -11,6 +15,9 @@ function bind_events(id) {
             $.ajax({
                 type: "PATCH",
                 url: "/tasks/" + $( this ).attr('id').split('_')[1] + "/",
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf);
+                },
                 data: {priority: ul.children('li').size() - index},
             });
         });
@@ -23,12 +30,14 @@ function resize_body() {
 }
 
 // add project
-function add_project() {
+function add_project(user_id) {
     $.ajax({
         type: "POST",
         url: "/projects/",
         data: {
+            csrfmiddlewaretoken: csrf,
             name: "Click button to change name ->",
+            user: user_id,
         }
     }).done(function (data) {
         render_project(data.id);
@@ -49,10 +58,16 @@ function project_init_change_name(id) {
 function project_change_name(id) {
     var section = $('#project_'+id);
     var name = section.find(".project-name-change input").val();
+    console.log(csrf)
     $.ajax({
         type: "PATCH",
         url: "/projects/" + id + "/",
-        data: {name: name},
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", csrf);
+        },
+        data: {
+            name: name
+        }
     });
     section.find('.project-name-change').replaceWith('<span class="m-words project-title">' + name + '</span>');
 }
@@ -65,6 +80,9 @@ function project_delete(id) {
     $.ajax({
         type: "DELETE",
         url: "/projects/" + id + "/",
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", csrf);
+        }
     });
 }
 
@@ -77,6 +95,7 @@ function add_task(id) {
             type: "POST",
             url: "/tasks/",
             data: {
+                csrfmiddlewaretoken: csrf,
                 name: task,
                 project: id,
             },
@@ -84,6 +103,7 @@ function add_task(id) {
             render_task(data.id, id);
         });
     }
+    section.find('.second input').val('');
 }
 
 // change task
@@ -103,6 +123,9 @@ function task_change(id) {
     $.ajax({
         type: "PATCH",
         url: "/tasks/" + id + "/",
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", csrf);
+        },
         data: {
             name: name,
         },
@@ -114,10 +137,12 @@ function task_change(id) {
 function task_status(id) {
     var task_div = $('#task_'+id);
     var status = task_div.find('.checkbox').prop('checked');
-    console.log(status)
     $.ajax({
         type: "PATCH",
         url: "/tasks/" + id + "/",
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", csrf);
+        },
         data: {
             status: status,
         },
@@ -132,6 +157,9 @@ function task_delete(id) {
     $.ajax({
         type: "DELETE",
         url: "/tasks/" + id + "/",
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", csrf);
+        },
     });
 }
 
@@ -169,6 +197,9 @@ function render_task(id, proj_id) {
             $.when($.ajax({
                 type: "PATCH",
                 url: "/tasks/" + id + "/",
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf);
+                },
                 data: {
                     deadline: date,
                 },

@@ -1,9 +1,25 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from django.views.generic import TemplateView
+from django.contrib.auth import forms, views
+from django.template.response import TemplateResponse
+from django.contrib.auth.models import User
 
 from .models import Project, Task
 from .serializers import ProjectSerializer, TaskSerializer
+
+
+def login_or_signup(request):
+    login_response = views.login(request)
+    if isinstance(login_response, TemplateResponse):
+        if request.method == 'POST':
+            # create user if don't exist
+            user = User.objects.create_user(username=request.POST.get('username'),
+                                            password=request.POST.get('password'))
+
+            return views.login(request)
+
+    return login_response
 
 
 class IndexView(TemplateView):
@@ -33,6 +49,9 @@ class RenderProject(TemplateView):
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+    def get_queryset(self):
+        return Project.objects.filter(user=self.request.user)
 
 
 class TaskViewSet(viewsets.ModelViewSet):

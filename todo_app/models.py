@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Project(models.Model):
@@ -8,6 +9,7 @@ class Project(models.Model):
     Project database model. This is class to interact with database
     """
     name = models.CharField(max_length=1024, null=True)
+    user = models.ForeignKey(User, related_name='projects')
 
     def __str__(self):
         """
