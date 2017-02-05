@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
 from django.views.generic import TemplateView
 from django.contrib.auth import forms, views
 from django.template.response import TemplateResponse
 from django.contrib.auth.models import User
+
+from rest_framework import viewsets
 
 from .models import Project, Task
 from .serializers import ProjectSerializer, TaskSerializer
