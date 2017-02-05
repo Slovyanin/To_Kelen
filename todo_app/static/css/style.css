@@ -7,7 +7,7 @@ body {
     width: 100%;
 	background-image: url("../images/back.png");
 	background-repeat: no-repeat;
-	background-size: auto 100%;
+	background-size: cover;
 }
 
 .line {
@@ -380,3 +380,15 @@ body {
 		.login-form button:active {
 			background-image:linear-gradient(rgb(77,132,100) 0%,rgb(150,205,176) 97%);
 		}
+
+.logout {
+	float: right;
+	margin: 20px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-family:Arial, Regular, sans-serif;
+	font-weight: bold;
+	color:rgb(51,51,51);
+	text-shadow:0px 1px 0px rgb(255,255,255);
+}
