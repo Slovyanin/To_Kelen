@@ -6,7 +6,6 @@ from django.contrib.auth.models import User, AnonymousUser
 from rest_framework.test import APITestCase
 
 from .models import Project, Task
-from .views import login_or_signup
 
 
 class ModelsTetCase(TestCase):
