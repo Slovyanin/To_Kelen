@@ -44,5 +44,3 @@ def get_statuses():
     statuses = []
     for t in Task.objects.order_by('name'):
         statuses.append({t: t.status})
-
-    return statuses
