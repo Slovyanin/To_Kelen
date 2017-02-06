@@ -36,11 +36,3 @@ class Task(models.Model):
     def is_past_deadline(self):
         return self.deadline < date.today()
 
-
-def get_statuses():
-    """
-    Get all statuses, not repeating, alphabetically ordered
-    """
-    statuses = []
-    for t in Task.objects.order_by('name'):
-        statuses.append({t: t.status})
